@@ -1,44 +1,19 @@
 package main
 
-import (
-	"github.com/gin-gonic/gin"
-	"net/http"
-)
+import ."./core"
 
 func main() {
-	controller := new(Controller)
-	router := new(Router)
+	router := New()
+	router.InitAuth()
 
-	engine := gin.Default()
-	//engine.LoadHTMLGlob("./templates")
-	engine.LoadHTMLFiles("./templates/index.tmpl")
-	//engine.Static("/", "./templates")
+	//core.LoadHTMLGlob("./templates")
+	//engine.LoadHTMLFiles("./templates/index.tmpl")
+	//core.Static("/", "./templates")
 
-	router.set(engine, controller)
+	router.LoadAssets()
 
-	engine.Run("localhost:8089")
-}
+	router.SetS(Index, GET)
+	//router.Set(Login, GET)
 
-type Router struct {
-
-}
-
-func (router *Router) set(engine *gin.Engine, controller *Controller) {
-	engine.GET("/", controller.index)
-	//router.POST("/somePost", posting)
-	//router.PUT("/somePut", putting)
-	//router.DELETE("/someDelete", deleting)
-	//router.PATCH("/somePatch", patching)
-	//router.HEAD("/someHead", head)
-	//router.OPTIONS("/someOptions", options)
-}
-
-type Controller struct {
-
-}
-
-func (controller *Controller) index(context *gin.Context) {
-	context.HTML(http.StatusOK, "index.tmpl", gin.H {
-		"title": "Main website",
-	})
+	router.Run("localhost:8089")
 }
