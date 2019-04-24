@@ -14,7 +14,7 @@ import (
 Get the name of a function.
 https://stackoverflow.com/questions/7052693/how-to-get-the-name-of-a-function-in-go
  */
-func GetFunctionName(foo interface{}) string {
+func getFunctionName(foo interface{}) string {
 	rawName := runtime.FuncForPC(reflect.ValueOf(foo).Pointer()).Name()
 	temp := strings.Split(rawName, ".")
 	originName := temp[len(temp) - 1]

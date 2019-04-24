@@ -29,6 +29,10 @@ func (router *Router) LoadAssets() {
 	router.engine.SetHTMLTemplate(t)
 }
 
+func (router *Router) LoadHTML() {
+	router.engine.LoadHTMLFiles("templates/index.tmpl")
+}
+
 func (router *Router) SetS(handler func(*gin.Context), httpMethod HttpMethod, isSecure ...bool) {
 	router.Set(handler, httpMethod, true)
 }
@@ -44,7 +48,7 @@ func (router *Router) Set(handler func(*gin.Context), httpMethod HttpMethod, isS
 	}
 
 	var handlerName string
-	if handlerName = GetFunctionName(handler); handlerName == "index" {
+	if handlerName = getFunctionName(handler); handlerName == "index" {
 		// hide "index" in url
 		handlerName = ""
 	}
