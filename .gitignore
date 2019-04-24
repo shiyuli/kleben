@@ -13,3 +13,5 @@
 
 # GoLand
 .idea
+# nodejs packages
+node_modules
